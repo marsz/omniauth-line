@@ -17,7 +17,7 @@ Next, tell OmniAuth about this provider. For a Rails app, your `config/initializ
 ```ruby
 # PROFILE permission required!!
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :line_messenger, "Channel_ID", "Channel_Secret"
+  provider :line, "Channel_ID", "Channel_Secret"
 end
 ```
 

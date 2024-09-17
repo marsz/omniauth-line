@@ -14,7 +14,7 @@ describe OmniAuth::Strategies::LineMessenger do
 
   describe 'client options' do
     it 'should have correct name' do
-      expect(subject.options.name).to eq('line_messenger')
+      expect(subject.options.name).to eq('line')
     end
 
     it 'should have correct site' do
