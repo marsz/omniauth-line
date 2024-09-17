@@ -3,8 +3,8 @@ require 'json'
 
 module OmniAuth
   module Strategies
-    class Line < OmniAuth::Strategies::OAuth2
-      option :name, 'line'
+    class LineMessenger < OmniAuth::Strategies::OAuth2
+      option :name, 'line_messenger'
       option :scope, 'profile openid email'
 
       option :client_options, {
@@ -31,7 +31,8 @@ module OmniAuth
           name:        raw_info['displayName'],
           image:       raw_info['pictureUrl'],
           description: raw_info['statusMessage'],
-          email:       JWT.decode(access_token.params['id_token'], options['client_secret']).first&.dig('email')
+          email:       fetch_email
+          # email:       JWT.decode(access_token.params['id_token'], options['client_secret']).first&.dig('email')
         }
       end
 
@@ -42,6 +43,12 @@ module OmniAuth
         raise ::Timeout::Error
       end
 
+      def fetch_email
+        data = JSON.load(access_token.post('oauth2/v2.1/verify', params: { id_token: access_token.params['id_token'], client_id: options['client_id'] }).body)
+        data['email']
+      rescue ::Errno::ETIMEDOUT
+        raise ::Timeout::Error
+      end
     end
   end
 end

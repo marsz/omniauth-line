@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe OmniAuth::Strategies::Line do
+describe OmniAuth::Strategies::LineMessenger do
   let(:request) { double('Request', :params => {}, :cookies => {}, :env => {}) }
 
   subject do
     args = ['channel_id', 'secret', @options || {}].compact
-    OmniAuth::Strategies::Line.new(*args).tap do |strategy|
+    OmniAuth::Strategies::LineMessenger.new(*args).tap do |strategy|
       allow(strategy).to receive(:request) {
         request
       }
@@ -14,7 +14,7 @@ describe OmniAuth::Strategies::Line do
 
   describe 'client options' do
     it 'should have correct name' do
-      expect(subject.options.name).to eq('line')
+      expect(subject.options.name).to eq('line_messenger')
     end
 
     it 'should have correct site' do
@@ -33,6 +33,7 @@ describe OmniAuth::Strategies::Line do
   describe 'uid' do
     before do
       allow(subject).to receive(:raw_info).and_return(raw_info_hash)
+      allow(subject).to receive(:fetch_email).and_return('foo@bar.com')
     end
 
     it 'should returns the uid' do
@@ -43,6 +44,7 @@ describe OmniAuth::Strategies::Line do
   describe 'info' do
     before do
       allow(subject).to receive(:raw_info).and_return(raw_info_hash)
+      allow(subject).to receive(:fetch_email).and_return('foo@bar.com')
     end
 
     it 'should returns the name' do

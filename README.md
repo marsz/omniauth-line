@@ -9,7 +9,7 @@ Supports the OpenID Connect Web Login. Read the Line developers docs for more de
 First start by adding this gem to your Gemfile:
 
 ```ruby
-gem 'omniauth-line'
+gem 'omniauth-line-messenger'
 ```
 
 Next, tell OmniAuth about this provider. For a Rails app, your `config/initializers/omniauth.rb` file should look like this:
@@ -17,7 +17,7 @@ Next, tell OmniAuth about this provider. For a Rails app, your `config/initializ
 ```ruby
 # PROFILE permission required!!
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :line, "Channel_ID", "Channel_Secret"
+  provider :line_messenger, "Channel_ID", "Channel_Secret"
 end
 ```
 
@@ -32,6 +32,7 @@ An example auth hash available in `request.env['omniauth.auth']`:
     :name => "yamada tarou",
     :image => "http://dl.profile.line.naver.jp/xxxxx",
     :description => "breakfast now.",
+    :email => "foo@bar.com"
   },
   :credentials => {
     :token => "a1b2c3d4...", # The OAuth 2.0 access token
