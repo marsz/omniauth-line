@@ -3,7 +3,7 @@ require 'json'
 
 module OmniAuth
   module Strategies
-    class LineMessenger < OmniAuth::Strategies::OAuth2
+    class Line < OmniAuth::Strategies::OAuth2
       option :name, 'line'
       option :scope, 'profile openid email'
 

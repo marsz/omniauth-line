@@ -1,2 +1,2 @@
-require "omniauth-line-messenger/version"
-require 'omniauth/strategies/line_messenger'
+require "omniauth-line/version"
+require 'omniauth/strategies/line'

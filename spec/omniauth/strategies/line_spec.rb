@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe OmniAuth::Strategies::LineMessenger do
+describe OmniAuth::Strategies::Line do
   let(:request) { double('Request', :params => {}, :cookies => {}, :env => {}) }
 
   subject do
     args = ['channel_id', 'secret', @options || {}].compact
-    OmniAuth::Strategies::LineMessenger.new(*args).tap do |strategy|
+    OmniAuth::Strategies::Line.new(*args).tap do |strategy|
       allow(strategy).to receive(:request) {
         request
       }
